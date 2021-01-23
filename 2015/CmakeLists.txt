@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(AoC VERSION 1.0 LANGUAGES CXX)
+
+set(MASTER_PROJECT OFF)
+
+if (${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
+	set(MASTER_PROJECT ON)
+endif()
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ${MASTER_PROJECT})
+
+add_executable(AoC 2015-2.cpp)
+
+if (MSVC)
+	add_compile_options(/W4 /WX)
+else()
+	add_compile_options(-Wall -Wextra -pedantic -Werror)
+endif()

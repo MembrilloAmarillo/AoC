@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstring>
 #include <iostream>
 #include <cassert>
 
@@ -39,10 +40,23 @@ long int mul_ribbon (const int& l, const int& w, const int& h) {
 
 int main (int argc, char *argv[])
 {
-	char *fi = argv[1];
-	FILE *f = fopen(fi, "r");
+	char fi[1024];
+	FILE* f;
 
-	assert(f != nullptr);
+	if (argc < 2) {
+		printf("Introduce file: ");
+		fgets(fi, 1024, stdin);
+		f = fopen(fi, "r");
+	}
+	else {
+		f = fopen(argv[1], "r");
+	}
+
+	
+	if (f == nullptr) {
+		fprintf(stderr, "Error al introducir fichero\n");
+		exit(1);
+	}
 		
 	char c;
 	int x_counter = 0;

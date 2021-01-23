@@ -1,0 +1,12 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "managed",
+      "name": "2015-2.cpp",
+      "project": "2015-2.cpp",
+      "projectTarget": ""
+    }
+  ]
+}
