@@ -53,8 +53,8 @@ int main (int argc, char *argv[])
 	}
 
 	
-	if (f == nullptr) {
-		fprintf(stderr, "Error al introducir fichero\n");
+	if (f == NULL) {
+		fprintf(stderr, "Error: File not found\n");
 		exit(1);
 	}
 		

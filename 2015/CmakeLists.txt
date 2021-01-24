@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ${MASTER_PROJECT})
 
-add_executable(AoC 2015-2.cpp)
+add_executable(AoC 2015-3.cpp)
 
 if (MSVC)
 	add_compile_options(/W4 /WX)
