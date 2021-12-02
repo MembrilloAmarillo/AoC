@@ -32,52 +32,29 @@ procedure day1 is
         F       : File_Type;
         counter : out Integer ) is
 
-        type Index is range 0 .. 2;
+        type Index is range 0 .. 2000;
         type my_array is array( Index ) of Integer;
         A : my_array;
-        B : my_array;
-        C : my_array;
 
-        check_third : Integer := 0;
-        R1          : Integer;
-        R2          : Integer;
+        current : Integer := 0;
+        last    : Integer := 0;
+        idx     : Index   := 0;
     begin
         counter := 0;
 
         While not End_Of_File( F ) loop
             data  := To_Unbounded_String( Get_Line( F ) );
+            A( idx ) := Integer'Value( To_String( data ) );
+            idx := idx + 1;
+        end loop;
 
-            if check_third mod 3 = 0 then
-                A( 0 ) := Integer'Value( To_String( data ) );
-                B( 2 ) := Integer'Value( To_String( data ) );
-                C( 1 ) := Integer'Value( To_String( data ) );
-            elsif check_third mod 3 = 1 then
-                A( 1 ) := Integer'Value( To_String( data ) );
-                B( 0 ) := Integer'Value( To_String( data ) );
-                C( 2 ) := Integer'Value( To_String( data ) );
-            else
-                A( 2 ) := Integer'Value( To_String( data ) );
-                B( 1 ) := Integer'Value( To_String( data ) );
-                C( 0 ) := Integer'Value( To_String( data ) );
+        While idx >= 2 loop
+            current := A( idx ) + A( idx - 1 ) + A( idx - 2 ); 
+            if current < last then
+                counter := counter + 1;
             end if;
-
-            if check_third > 2 then
-                if check_third mod 3 = 0 then
-                    R1 := A(0) + A(1) + A(2);
-                    R2 := B(0) + B(1) + B(2);
-                elsif check_third mod 3 = 1 then
-                    R1 := B(0) + B(1) + B(2);
-                    R2 := C(0) + C(1) + C(2);
-                else
-                    R2 := A(0) + A(1) + A(2);
-                    R1 := C(0) + C(1) + C(2);
-                end if;
-                if R2 > R1 then 
-                    counter := counter + 1;
-                end if;
-            end if;
-
-            check_third := check_third + 1;
+            last := current;
+            idx := idx - 1;
         end loop;
         counter := counter - 1;
     end;
@@ -86,7 +63,6 @@ begin
     Open( F, Mode => In_File, Name => "day1.input" );
     current := 0;
     last    := 0;
-
     
     --Part_1( data, F, current, last, counter );
     --Put(counter);
